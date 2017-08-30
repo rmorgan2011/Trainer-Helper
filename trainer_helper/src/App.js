@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import PictureWindow from './PictureWindow'
 import './App.css';
 import "core-js/fn/symbol/iterator.js";
+import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
+
+const typeStrings =['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','fairy']
+const typeLinks = typeStrings.map((name) => <NavLink style={{padding: '10px'}}to={name}>{name.charAt(0).toUpperCase() +name.slice(1)}</NavLink>)
 
 class App extends Component {
   constructor(props){
+
     super(props);
     this.state ={
       lowRange: 1,
@@ -19,7 +24,7 @@ class App extends Component {
   }
   performFetch(lowRange,highRange){
     const appContext = this;
-    
+
     var tempArray = []
     for(var i = Number(lowRange); i <= Number(highRange); i++){
       tempArray[i-lowRange] = fetch('https://pokeapi.co/api/v2/pokemon/' + i + '/', {cache: 'force-cache'}).then(
@@ -35,7 +40,7 @@ class App extends Component {
     })
   }
 
-  
+
 
   sortArray(appContext){
     appContext.setState({pictures: this.state.pictures.sort(function(a,b){
@@ -75,6 +80,7 @@ class App extends Component {
   render() {
 
     return (
+      <BrowserRouter>
       <div  style={{background: '#ee1515', display: 'inline-block',  margin: '20px',borderRadius: '10px', borderStyle: 'solid', borderWidth: '2px'}}>
       <form style={{background: '#f0f0f0', borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}}onSubmit={(e) => this.update(e)}>
       <div style={{display: 'flex', padding: '10px'}}>
@@ -83,11 +89,13 @@ class App extends Component {
         <input min='1' max='721' type= 'number' inputMode = 'numeric' style = {{margin: '10px'}} onChange={(e) => this.updateHigh(e)}/>
         <button type='submit'>Submit</button>
       </div>
+      <NavLink style={{padding: '10px'}}to=''>None</NavLink>
+      {typeLinks}
       </form>
-      
-        <PictureWindow style={{}}pictures={this.state.pictures}/>
-      
+        <Route path="/" exact render={(props) => <PictureWindow match={props.match} style={{}}pictures={this.state.pictures}/>} />
+        <Route path="/:id" render={(props) => <PictureWindow match={props.match} style={{}}pictures={this.state.pictures}/>}/>
       </div>
+      </BrowserRouter>
     );
   }
 }

@@ -24,6 +24,8 @@ function typesColor(type){
     }
 }
 
+
+
 function Types(props){
     var nameTag = '#' + props.id + ': ' + props.name
     if(props.types.length === 1){
@@ -35,11 +37,11 @@ function Types(props){
     }
     else{
         return(
-            
+
             <div style={{paddingBottom: '5px', background: 'linear-gradient(to right, ' + typesColor(props.types[0].type.name) +' 50%,' + typesColor(props.types[1].type.name) + ' 50%)' , borderRadius: '5px', borderStyle: 'solid', borderWidth: '2px', padding: '3px'}}>
                 <div style={{textAlign: 'center'}}>{nameTag}</div>
-            </div>    
-            
+            </div>
+
         )
     }
 }
