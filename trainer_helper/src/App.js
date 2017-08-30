@@ -3,9 +3,10 @@ import PictureWindow from './PictureWindow'
 import './App.css';
 import "core-js/fn/symbol/iterator.js";
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
+import {typesColor} from './helpers/Types'
 
 const typeStrings =['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','fairy']
-const typeLinks = typeStrings.map((name) => <NavLink style={{padding: '10px'}}to={name}>{name.charAt(0).toUpperCase() +name.slice(1)}</NavLink>)
+const typeLinks = typeStrings.map((name) => <NavLink key={name} style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '2px',paddingLeft: '2px',borderWidth: '2px', borderRadius: '3px', borderStyle: 'solid', background: typesColor(name)}}to={name}>{name.charAt(0).toUpperCase() +name.slice(1)}</NavLink>)
 
 class App extends Component {
   constructor(props){
@@ -82,18 +83,24 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div  style={{background: '#ee1515', display: 'inline-block',  margin: '20px',borderRadius: '10px', borderStyle: 'solid', borderWidth: '2px'}}>
+      <div style= {{marginBottom: '10px'}}>
       <form style={{background: '#f0f0f0', borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}}onSubmit={(e) => this.update(e)}>
-      <div style={{display: 'flex', padding: '10px'}}>
+      <div style={{display: 'flex', padding: '10px',width:'500px'}}>
         <div style={{display: 'flex', alignItems: 'center', marginLeft: '40px'}}>Range: </div>
         <input min='1' max='721' type= 'number' inputMode = 'numeric' style = {{margin: '10px'}} onChange={(e) => this.updateLow(e)}/>
         <input min='1' max='721' type= 'number' inputMode = 'numeric' style = {{margin: '10px'}} onChange={(e) => this.updateHigh(e)}/>
         <button type='submit'>Submit</button>
+        
       </div>
-      <NavLink style={{padding: '10px'}}to=''>None</NavLink>
-      {typeLinks}
+      
       </form>
-        <Route path="/" exact render={(props) => <PictureWindow match={props.match} style={{}}pictures={this.state.pictures}/>} />
-        <Route path="/:id" render={(props) => <PictureWindow match={props.match} style={{}}pictures={this.state.pictures}/>}/>
+      </div>
+      <div>
+        <NavLink style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '2px',paddingLeft: '2px',borderWidth: '2px', borderRadius: '3px', borderStyle: 'solid', background: 'white'}}to=''>None</NavLink>
+        {typeLinks}
+      </div>
+        <Route path="/" exact render={(props) => <PictureWindow key= "/" match={props.match} style={{}}pictures={this.state.pictures}/>} />
+        <Route path="/:id" render={(props) => <PictureWindow key= {props.match.id} match={props.match} style={{}}pictures={this.state.pictures}/>}/>
       </div>
       </BrowserRouter>
     );

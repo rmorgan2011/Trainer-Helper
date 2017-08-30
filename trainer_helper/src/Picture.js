@@ -2,7 +2,6 @@ import React from 'react';
 import ReactToolTip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import Types from './helpers/Types'
-import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
 
 function Picture(props){

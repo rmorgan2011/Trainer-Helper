@@ -1,6 +1,6 @@
 import React from 'react';
 
-function typesColor(type){
+export function typesColor(type){
     switch(type){
     case 'normal': return '#A8a77a';
     case 'fighting': return '#c22e28';
