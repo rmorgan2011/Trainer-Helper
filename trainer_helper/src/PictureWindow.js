@@ -7,7 +7,7 @@ function filterElement(element,id){
     return <Picture key={element.id} pic={element}/>
   }
   else if(element.types.length === 1 && element.types[0].type.name === id){
-  return <Picture key={element.id} pic={element}/>
+    return <Picture key={element.id} pic={element}/>
   }
   else if(element.types.length ===2 && (element.types[0].type.name === id || element.types[1].type.name === id)){
     return <Picture key={element.id} pic={element}/>

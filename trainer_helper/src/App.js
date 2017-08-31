@@ -6,7 +6,7 @@ import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 import {typesColor} from './helpers/Types'
 
 const typeStrings =['normal','fighting','flying','poison','ground','rock','bug','ghost','steel','fire','water','grass','electric','psychic','ice','dragon','fairy']
-const typeLinks = typeStrings.map((name) => <NavLink key={name} style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '2px',paddingLeft: '2px',borderWidth: '2px', borderRadius: '3px', borderStyle: 'solid', background: typesColor(name)}}to={name}>{name.charAt(0).toUpperCase() +name.slice(1)}</NavLink>)
+const typeLinks = typeStrings.map((name) => <NavLink key={name} style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '3px',paddingLeft: '3px',borderWidth: '2px', borderRadius: '4px', borderStyle: 'solid', background: typesColor(name)}}to={name}>{name.charAt(0).toUpperCase() +name.slice(1)}</NavLink>)
 
 class App extends Component {
   constructor(props){
@@ -95,8 +95,8 @@ class App extends Component {
       
       </form>
       </div>
-      <div>
-        <NavLink style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '2px',paddingLeft: '2px',borderWidth: '2px', borderRadius: '3px', borderStyle: 'solid', background: 'white'}}to=''>None</NavLink>
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+        <NavLink style={{textDecoration: 'none', color: 'black', margin: '10px', padding: '1px', paddingRight: '2px',paddingLeft: '3px',borderWidth: '2px', borderRadius: '4px', borderStyle: 'solid', background: 'white'}}to=''>None</NavLink>
         {typeLinks}
       </div>
         <Route path="/" exact render={(props) => <PictureWindow key= "/" match={props.match} style={{}}pictures={this.state.pictures}/>} />
